@@ -1,0 +1,182 @@
+fileFormatVersion: 1
+guid: 5c7a8ef318afa974cb3ce64f05c0faee
+ModelImporter:
+  importerVersion: 7
+  meshes:
+    scaleFactor: 0.015
+    useFileUnits: 1
+    meshCompression: 0
+    generateColliders: 0
+    swapUVs: 0
+  tangentSpace:
+    normalImportMode: 0
+    tangentImportMode: 1
+    smoothingAngle: 96
+    splitTangents: 0
+  materials:
+    generation: 1
+  animations:
+    generation: 3
+    bakeAnimations: 0
+    animationCompression: 0
+    animationWrapMode: 0
+    splitAnimations: 1
+    clips:
+      idle1:
+        firstFrame: 1
+        lastFrame: 39
+        loop: 1
+        wrapMode: 2
+      run:
+        firstFrame: 41
+        lastFrame: 59
+        loop: 1
+        wrapMode: 2
+      jump:
+        firstFrame: 61
+        lastFrame: 65
+        loop: 0
+        wrapMode: 0
+      sideR:
+        firstFrame: 66
+        lastFrame: 75
+        loop: 1
+        wrapMode: 0
+      sideL:
+        firstFrame: 76
+        lastFrame: 85
+        loop: 1
+        wrapMode: 0
+      back:
+        firstFrame: 86
+        lastFrame: 105
+        loop: 1
+        wrapMode: 2
+      zombi_walk:
+        firstFrame: 106
+        lastFrame: 145
+        loop: 1
+        wrapMode: 2
+      TopBlendWave:
+        firstFrame: 147
+        lastFrame: 163
+        loop: 1
+        wrapMode: 0
+      TopBlendWeapon:
+        firstFrame: 165
+        lastFrame: 170
+        loop: 1
+        wrapMode: 0
+      SwordFight_idle:
+        firstFrame: 180
+        lastFrame: 220
+        loop: 1
+        wrapMode: 0
+      SwordFight_attack:
+        firstFrame: 231
+        lastFrame: 235
+        loop: 0
+        wrapMode: 0
+      SwordFight_hit:
+        firstFrame: 240
+        lastFrame: 245
+        loop: 0
+        wrapMode: 0
+      mounted:
+        firstFrame: 250
+        lastFrame: 270
+        loop: 1
+        wrapMode: 0
+      idle2:
+        firstFrame: 280
+        lastFrame: 320
+        loop: 1
+        wrapMode: 2
+      walk:
+        firstFrame: 321
+        lastFrame: 360
+        loop: 1
+        wrapMode: 2
+  nodeInfo:
+    character:
+    - 100000
+    - 400000
+    - 13700000
+    //RootNode:
+    - 100002
+    - 400002
+    - 11100000
+    head:
+    - 100004
+    - 400004
+    left_calf:
+    - 100006
+    - 400006
+    left_foot:
+    - 100008
+    - 400008
+    left_forearm:
+    - 100010
+    - 400010
+    left_hand:
+    - 100012
+    - 400012
+    left_shoulder:
+    - 100014
+    - 400014
+    left_thigh:
+    - 100016
+    - 400016
+    right_calf:
+    - 100018
+    - 400018
+    right_foot:
+    - 100020
+    - 400020
+    right_forearm:
+    - 100022
+    - 400022
+    right_hand:
+    - 100024
+    - 400024
+    right_shoulder:
+    - 100026
+    - 400026
+    right_thigh:
+    - 100028
+    - 400028
+    root:
+    - 100030
+    - 400030
+    spineA:
+    - 100032
+    - 400032
+    spineB:
+    - 100034
+    - 400034
+AssetImporter:
+  importerVersion: 1
+  fileIDToRecycleName:
+    4300000: character
+    4300002: sword
+    4300004: shield
+    7400000: Take 001 //// character284
+    7400002: idle //// character284
+    7400004: run //// character284
+    7400006: jump //// character284
+    7400008: sideR //// character284
+    7400010: sideL //// character284
+    7400012: back //// character284
+    7400014: zombiWalk //// character284
+    7400016: salute //// character284
+    7400018: weapon //// character284
+    7400020: SwordFight_idle //// character284
+    7400022: SwordFight_attack //// character284
+    7400024: SwordFight_hit //// character284
+    7400026: mounted //// character284
+    7400028: idle1 //// character284
+    7400030: idle2 //// character284
+    7400032: walk //// character284
+    7400034: zombi_walk //// character284
+    7400036: TopBlendWave //// character284
+    7400038: TopBlendWeapon //// character284
