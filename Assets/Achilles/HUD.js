@@ -1,17 +1,24 @@
-#pragma strict
+// ゲームの状態表示（いわゆるHUD）を制御するスクリプト。
 
-// ゲームの状態表示（いわゆるHUD）
+var barTexture : Texture2D; // バー表示のための白テクスチャ
 
-var barTexture : Texture2D;
+private var playerState : PlayerState;
+
+function Start() {
+	playerState = FindObjectOfType(PlayerState) as PlayerState;
+}
 
 function OnGUI() {
-	if (GameState.energy > 0.6) {
+	// エネルギー・バーの色の変化。
+	if (playerState.energy > 0.6) {
 		GUI.color = Color(0.0, 1.0, 1.0, 0.4);
-	} else if (GameState.energy > 0.3) {
+	} else if (playerState.energy > 0.3) {
 		GUI.color = Color(1.0, 1.0, 0.0, 0.4);
 	} else {
 		GUI.color = Color(1.0, 0.0, 0.0, 0.4);
 	}
-	var h = Screen.height;
-	GUI.DrawTexture(Rect(0, 0.98 * h, GameState.energy * Screen.width, 0.02 * h), barTexture);
+	// エネルギー・バーの表示。
+	var bw : float = playerState.energy * Screen.width;
+	var sh : float = Screen.height;
+	GUI.DrawTexture(Rect(0, 0.98 * sh, bw, 0.02 * sh), barTexture);
 }

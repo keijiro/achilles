@@ -15,7 +15,7 @@ var jumpEnergy : float;		// ジャンプに必要なエネルギー量
 var dashEnergy : float;		// ダッシュに必要なエネルギー量
 var energyRegain : float;	// エネルギーの毎秒回復量
 
-private var gameState : GameState; // ゲームステートへの直接参照
+private var playerState : PlayerState;
 
 private var dashFx : ParticleEmitter;	// ダッシュエフェクトへの参照
 private var jumpFx : ParticleEmitter;	// ジャンプエフェクトへの参照
@@ -67,13 +67,13 @@ private function ProcessYMove() {
 	} else {
 		// ジャンプ判定。
 		if (Input.GetAxis("Jump") > 0) {
-			if (GameState.energy > jumpEnergy) {
+			if (playerState.energy > jumpEnergy) {
     			// ジャンプ開始。
     			yVel = yVelJump;
     			yPos += yVel * Time.deltaTime;
     			animation.Play("jump");
     			jumpFx.Emit();
-    			GameState.energy -= jumpEnergy;
+    			playerState.energy -= jumpEnergy;
 			} else {
 				// エネルギーが足りない演出。
 			}
@@ -90,12 +90,12 @@ private function UpdateYaw() {
 // ダッシュの起動と時間経過。
 private function ProcessDash() {
 	if (Input.GetButtonDown("Fire1") && dashTime == 0.0) {
-		if (GameState.energy > dashEnergy) {
+		if (playerState.energy > dashEnergy) {
     		// ダッシュ起動。
     		dashTime = dashLength;
-    		gameState.dash = true;
+    		playerState.dash = true;
     		dashFx.emit = true;
-   			GameState.energy = 0;
+   			playerState.energy = 0;
 		} else {
 			// エネルギーが足りない演出。
 		}
@@ -105,7 +105,7 @@ private function ProcessDash() {
 		if (dashTime <= 0.0) {
 			// ダッシュ終了。
 			dashTime = 0.0;
-			gameState.dash = false;
+			playerState.dash = false;
 			dashFx.emit = false;
 		}
 	}
@@ -114,25 +114,25 @@ private function ProcessDash() {
 // ダッシュによる加速とワールド物理の干渉の処理。
 private function ApplyDashToWorld() {
 	// 目標速度：初期速度の２倍。
-	var targetVelocity = 2.0 * gameState.initialScrollVelocity;
-	if (dashTime > 0.0 && gameState.scrollVelocity < targetVelocity) {
+	var targetVelocity = 2.0 * playerState.initialVelocity;
+	if (dashTime > 0.0 && playerState.velocity < targetVelocity) {
 		// 加速中。
 		Physics.gravity.z = -dashAccel;
-		gameState.scrollVelocity += dashAccel * Time.deltaTime;
-	} else if (dashTime == 0.0 && gameState.scrollVelocity > gameState.initialScrollVelocity) {
+		playerState.velocity += dashAccel * Time.deltaTime;
+	} else if (dashTime == 0.0 && playerState.velocity > playerState.initialVelocity) {
 		// 減速中。
 		Physics.gravity.z = dashAccel;
-		gameState.scrollVelocity -= dashAccel * Time.deltaTime;
+		playerState.velocity -= dashAccel * Time.deltaTime;
 	} else {
 		// 定常運転中。
 		Physics.gravity.z = 0.0;
-		gameState.scrollVelocity = gameState.initialScrollVelocity;
+		playerState.velocity = playerState.initialVelocity;
 	}
 }
 
 function OnDamage() {
 	// ダッシュ中は無効。
-	if (GameState.dash) return;
+	if (playerState.dash) return;
 	// DeadBodyControllerとGameOverScreenをアクティブにして、HUDと自分は停止する。
 	(GetComponent(DeadBodyController) as DeadBodyController).enabled = true;
 	(GetComponent(GameOverScreen) as GameOverScreen).enabled = true;
@@ -141,7 +141,7 @@ function OnDamage() {
 }
 
 function Awake() {
-	gameState = GetComponent(GameState) as GameState;
+	playerState = GetComponent(PlayerState) as PlayerState;
 	dashFx = transform.Find("Dash Effect").particleEmitter;
 	jumpFx = transform.Find("Jump Effect").particleEmitter;
 }
@@ -161,7 +161,7 @@ function Update() {
 	transform.localPosition = Vector3(xPos, yPos, 0);
 	transform.localRotation = Quaternion.AngleAxis(yaw, Vector3.up);
 	// エネルギーの回復。
-	if (!GameState.dash) {
-    	GameState.energy = Mathf.Min(GameState.energy + energyRegain * Time.deltaTime, 1.0);
+	if (!playerState.dash) {
+    	playerState.energy = Mathf.Min(playerState.energy + energyRegain * Time.deltaTime, 1.0);
 	}
 }

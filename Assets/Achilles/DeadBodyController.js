@@ -1,5 +1,3 @@
-#pragma strict
-
 // 死んだ後のAchillesの制御
 
 var ragdoll : GameObject; // 死体用ラグドール
@@ -19,13 +17,15 @@ function Start() {
 // 再帰的にトランスフォームをコピーする関数。
 // ついでにこの中で吹っ飛びのための力を与える。
 private function CopyTransformsRecursively(src : Transform,  dst : Transform) {
+	var playerState : PlayerState = FindObjectOfType(PlayerState) as PlayerState;
+
 	dst.position = src.position;
 	dst.rotation = src.rotation;
 	
 	if (dst.rigidbody) {
 		dst.rigidbody.velocity = Vector3(Random.Range(-5.0, 5.0),
 										 Random.Range(0.0, 8.0),
-										 0.1 * GameState.scrollVelocity);
+										 0.1 * playerState.velocity);
 	}
 	
 	for (var object in dst) {

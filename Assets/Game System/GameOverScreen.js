@@ -1,4 +1,4 @@
-// タイトル画面
+// ゲームオーバー画面を制御するスクリプト。
 
 var skin : GUISkin;
 
@@ -6,10 +6,11 @@ private var time : float; // 画面開始からの経過時間
 
 function Update() {
 	time += Time.deltaTime;
-	// キー入力によりメインシーンを開始する。
-	if (Input.GetButtonDown("Fire1")) {
+	// キー入力によりタイトルシーンへ戻る。
+	// ただし、1.0秒経過するまでは無効期間とする。
+	if (time > 1.0 && Input.GetButtonDown("Fire1")) {
 		var transition : Transition = FindObjectOfType(Transition) as Transition;
-		transition.FadeOutAndLoadLevel("Main");
+		transition.FadeOutAndLoadLevel("Title");
 	}
 }
 
@@ -20,11 +21,11 @@ function OnGUI() {
 	GUILayout.FlexibleSpace();
 	
 	// 1.0秒後からフェードイン。
-	GUI.color = Color(1, 1, 1, Mathf.Clamp01((time - 1.0) * 1.5));
-	GUILayout.Label("A C H I L L E S", "message");
+	GUI.color = Color(1, 1, 1, Mathf.Clamp01((time - 1.0) * 2.0));
+	GUILayout.Label("GAME OVER", "message");
 	
-	// 1.9秒後からフェードイン。
-	GUI.color = Color(1, 1, 1, Mathf.Clamp01((time - 1.9) * 1.5));
+	// 1.5秒後からフェードイン。
+	GUI.color = Color(1, 1, 1, Mathf.Clamp01((time - 1.5) * 2.0));
 	GUILayout.Label("hit space key", "message");
 	
 	GUILayout.FlexibleSpace();
