@@ -22,10 +22,10 @@ function OnGUI() {
 	GUILayout.FlexibleSpace();
 	
 	GUI.color = Color(1, 1, 1, Mathf.Clamp((time - 1.0) * 2.0, 0.0, 1.0));
-	GUILayout.Label("GAME OVER");
+	GUILayout.Label("GAME OVER", "message");
 	
 	GUI.color = Color(1, 1, 1, Mathf.Clamp((time - 1.5) * 2.0, 0.0, 1.0));
-	GUILayout.Label("hit space key");
+	GUILayout.Label("hit space key", "message");
 	
 	GUILayout.FlexibleSpace();
 	GUILayout.EndVertical();

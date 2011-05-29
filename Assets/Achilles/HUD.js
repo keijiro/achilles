@@ -2,7 +2,6 @@
 
 // ゲームの状態表示（いわゆるHUD）
 
-var skin : GUISkin;
 var barTexture : Texture2D;
 
 function OnGUI() {
