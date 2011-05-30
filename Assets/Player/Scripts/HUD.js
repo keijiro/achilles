@@ -1,8 +1,13 @@
-// ゲームの状態表示（いわゆるHUD）を制御するスクリプト。
+// ゲームの状態表示（いわゆるHUD）の制御。
 
-var barTexture : Texture2D; // バー表示のための白テクスチャ
+var barTexture : Texture2D; // バー表示のための白テクスチャ。
 
 private var playerState : PlayerState;
+
+function OnPlayerDeath() {
+	// プレイヤーの死亡と同時にHUDも非表示化する。
+	Destroy(this);
+}
 
 function Start() {
 	playerState = FindObjectOfType(PlayerState) as PlayerState;

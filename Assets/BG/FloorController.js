@@ -3,7 +3,7 @@
 private var playerState : PlayerState;
 
 function Start () {
-	playerState = FindObjectOfType(PlayerState) as PlayerState;
+	playerState = FindObjectOfType(PlayerState);
 }
 
 function FixedUpdate () {

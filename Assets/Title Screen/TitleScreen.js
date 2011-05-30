@@ -1,20 +1,21 @@
-// タイトル画面
+// タイトル画面の制御。
 
 var skin : GUISkin;
 
-private var time : float; // 画面開始からの経過時間
+private var time : float; // 画面開始からの経過時間。
 
 function Update() {
 	time += Time.deltaTime;
 	// キー入力によりメインシーンを開始する。
 	if (Input.GetButtonDown("Fire1")) {
-		var transition : Transition = FindObjectOfType(Transition) as Transition;
-		transition.FadeOutAndLoadLevel("Main");
+		SendMessage("FadeOutAndLoadLevel", "Main");
 	}
 }
 
 function OnGUI() {
 	GUI.skin = skin;
+	GUI.depth = 1;
+
 	GUILayout.BeginArea(Rect(0, 0, Screen.width, Screen.height));
 	GUILayout.BeginVertical();
 	GUILayout.FlexibleSpace();

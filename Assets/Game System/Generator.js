@@ -1,8 +1,8 @@
-// 障害物の生成を制御するスクリプト。
+// 障害物の生成。
 
-var randomWidth : float;	// 生成位置のランダム幅
+var randomWidth : float;	// 生成位置のランダム幅。
 
-// 各障害物のプレハブ
+// 各障害物のプレハブ。
 var cratePrefab : GameObject;
 var boxPrefab : GameObject;
 var ballPrefab : GameObject;
@@ -23,7 +23,7 @@ private function RandomPositionOnFloor() : Vector3 {
 	return pos;
 }
 
-// 各障害物の生成。
+// Crate障害物の生成。
 private function CreateCrate() : GameObject {
 	var go : GameObject =
 	  Instantiate(cratePrefab, RandomPositionOnFloor(),
@@ -32,6 +32,7 @@ private function CreateCrate() : GameObject {
 	return go;
 }
 
+// Box障害物の生成。
 private function CreateBox() : GameObject {
 	var go : GameObject =
 	  Instantiate(boxPrefab, RandomPosition(), Random.rotation);
@@ -40,6 +41,7 @@ private function CreateBox() : GameObject {
 	return go;
 }
 
+// Ball障害物の生成。
 private function CreateBall() : GameObject {
 	var go : GameObject =
 	  Instantiate(ballPrefab, transform.position, transform.rotation);
@@ -47,13 +49,14 @@ private function CreateBall() : GameObject {
 	return go;
 }
 
+// Crawler障害物の生成。
 private function CreateCrawler() : GameObject {
 	return Instantiate(crawlerPrefab, RandomPositionOnFloor(),
 	                   crawlerPrefab.transform.rotation);
 }
 
 function Start() {
-	playerState = FindObjectOfType(PlayerState) as PlayerState;
+	playerState = FindObjectOfType(PlayerState);
 	// 最初のフェーズ：簡単な障害物だけ。
 	for (var i = 14; i > 0; --i) {
 		CreateCrate();

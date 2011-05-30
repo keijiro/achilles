@@ -1,21 +1,27 @@
-// ゲームオーバー画面を制御するスクリプト。
+// ゲームオーバー画面の制御。
 
 var skin : GUISkin;
 
-private var time : float; // 画面開始からの経過時間
+private var time : float; // 画面開始からの経過時間。
+
+// ゲームオーバーの通知と同時に処理を開始する。
+function OnPlayerDeath() {
+	enabled = true;
+}
 
 function Update() {
 	time += Time.deltaTime;
 	// キー入力によりタイトルシーンへ戻る。
 	// ただし、1.0秒経過するまでは無効期間とする。
 	if (time > 1.0 && Input.GetButtonDown("Fire1")) {
-		var transition : Transition = FindObjectOfType(Transition) as Transition;
-		transition.FadeOutAndLoadLevel("Title");
+		SendMessage("FadeOutAndLoadLevel", "Title");
 	}
 }
 
 function OnGUI() {
 	GUI.skin = skin;
+	GUI.depth = 1;
+	
 	GUILayout.BeginArea(Rect(0, 0, Screen.width, Screen.height));
 	GUILayout.BeginVertical();
 	GUILayout.FlexibleSpace();
